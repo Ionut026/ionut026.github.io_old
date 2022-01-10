@@ -1,15 +1,12 @@
 <div class="col justify-content-center py-4">
-    <div class="row justify-content-center">
-        <a routerLink="/about">About the game</a>
-    </div>
     <div *ngIf="($gameConfiguration | async) as gameconfiguration" class="col d-flex justify-content-center">
-        <h3>Hi {{gameconfiguration.userName}}, here's the game status:</h3>
+        <h4>Hi {{gameconfiguration.userName}}, here's the game status:</h4>
     </div>
     <div class="row d-flex justify-content-center py-3">
 
-        <div class="col-6 col-lg-3">
+        <div class="col-4 col-lg-3 px-1 border ">
             <h5>Swarm status:</h5>
-            <table class="table table-responsive table-sm data-table" *ngIf="($swarm | async) as swarm">
+            <table class="table table-responsive table-sm small data-table" *ngIf="($swarm | async) as swarm">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -28,23 +25,25 @@
             </table>
         </div>
 
-        <div class="col-6 col-lg-3">
+        <div class="col-8 col-lg-3 px-0 px-1 border">
             <h5>Hits history:</h5>
-            <table class="table table-responsive table-sm data-table" *ngIf="($hits | async) as hits">
+            <table #scrollMe class="table table-responsive table-sm small data-table" *ngIf="($hits | async) as hits">
                 <thead>
                     <tr>
                         <th>Bee Id</th>
-                        <th>Timestamp</th>
+                        <th>Type</th>                      
                         <th>HP Before</th>
                         <th>HP After</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let hit of hits">
                         <td>{{hit.damagedBee.id}}</td>
-                        <td>{{hit.date | date:'medium'}}</td>
+                        <td>{{hit.damagedBee.beeType.name}}</td>
                         <td>{{hit.healthPointBefore}}</td>
                         <td>{{hit.healthPointAfter}}</td>
+                        <td class="text-nowrap">{{hit.date | date:'short'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -58,10 +57,8 @@
     <div class="row justify-content-center pt-3">
         <button class="btn btn-warning col-xs-12 col-md-2 mt-2 mt-md-0 mx-1" [disabled]="($isGameOver | async)"
             (click)="hitSwarm()">Hit swarm</button>
-
         <button class="btn btn-warning col-xs-12 col-md-2 mt-2 mt-md-0 mx-1" (click)="resetGame()">Reset Game</button>
-
-        <button class="btn btn-warning col-xs-12 col-md-2 mt-2 mt-md-0 mx-1" routerLink="/config">Change
-            Configuration</button>
+        
+        <button class="btn btn-warning col-xs-12 col-md-2 mt-2 mt-md-0 mx-1" routerLink="/about">About</button>
     </div>
 </div>

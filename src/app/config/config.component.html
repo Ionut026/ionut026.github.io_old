@@ -1,15 +1,13 @@
 <div class="col justify-content-center py-4">
-    <div class="row justify-content-center">
-        <a routerLink="/about">About the game</a>
-    </div>
     <div *ngIf="($gameConfiguration | async) as gameconfiguration" class="col d-flex justify-content-center">
-        <h2>Hi {{gameconfiguration.userName}}, here's your configuration:</h2>
-    </div>    
+        <h4>Hi {{gameconfiguration.userName}}, here's your configuration:</h4>
+    </div>
     <div class="row d-flex justify-content-center py-3">
         <ul *ngIf="($gameConfiguration | async) as gameconfiguration">
             <li *ngFor="let beeTypeConfig of gameconfiguration.beeTypesConfiguration">
                 {{beeTypeConfig.name}}, {{beeTypeConfig.count}} <span *ngIf="beeTypeConfig.count == 1"> bee</span>
-                <span *ngIf="beeTypeConfig.count > 1"> bees</span>, {{beeTypeConfig.healtPoints}}HP, {{beeTypeConfig.hitDamage}} damage/hit
+                <span *ngIf="beeTypeConfig.count > 1"> bees</span>, {{beeTypeConfig.healtPoints}}HP,
+                {{beeTypeConfig.hitDamage}} damage/hit
             </li>
         </ul>
     </div>
@@ -17,9 +15,10 @@
         <button class="col-xs-6 col-md-3 btn btn-warning" routerLink="/welcome">Change User Name</button>
     </div>
     <div class="row justify-content-center pb-3">
-        <button class="col-xs-6 col-md-3 btn btn-warning">Edit Configuration</button>
+        <button class="col-xs-6 col-md-3 btn btn-warning" routerLink="/about">About</button>
     </div>
     <div class="row justify-content-center pb-3">
         <button class="col-xs-6 col-md-3 btn btn-warning" routerLink="/game">Play game</button>
-    </div>    
+    </div>
+
 </div>

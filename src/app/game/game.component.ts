@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConfigService } from '../service/config.service';
 import { GameService } from '../service/game.service';
@@ -12,6 +12,8 @@ import { Swarm } from '../types/swarm';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
 
   get $swarm(): Observable<Swarm | undefined> {
     return this.gameService.$swarm;
@@ -33,6 +35,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetGame();
+    this.scrollToBottom();
   }
 
   hitSwarm() {
@@ -41,6 +44,20 @@ export class GameComponent implements OnInit {
 
   resetGame() {
     this.gameService.resetGame();
+  }
+
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      if (this.myScrollContainer != undefined) {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      }
+    }
+    catch (err) { }
   }
 
 }
