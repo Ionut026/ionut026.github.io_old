@@ -1,0 +1,13 @@
+<div class=".container-md h-100 mw-100 ">
+  <div class="col justify-content-center py-4">
+    <div class="row d-flex justify-content-center">
+      <img [ngClass]="{'bee-img': this.router.url.includes('/welcome') || this.router.url.includes('/about'),
+      'bee-img-sm': !this.router.url.includes('/welcome') && !this.router.url.includes('/about')
+    }" class="center" src='../../assets/img/bee.png'>
+    </div>
+    <div class="row d-flex justify-content-center mt-3">
+      <h1> Bee game </h1>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
