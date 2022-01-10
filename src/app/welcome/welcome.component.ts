@@ -11,7 +11,7 @@ import { Subscriber, Subscription } from 'rxjs';
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
 
-  userName: string | null = '';
+  userName: string | undefined = '';
   private userNameSubscription: Subscription;
 
   constructor(public router: Router, private configService: ConfigService) {
@@ -27,7 +27,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   onContinue() {
-    this.configService.updateUserName(this.userName??"");
+    this.configService.updateUserName(this.userName ?? "");
     this.router.navigate(['/config']);
   }
 

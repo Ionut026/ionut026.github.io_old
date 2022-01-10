@@ -13,7 +13,7 @@ import { Swarm } from '../types/swarm';
 })
 export class GameComponent implements OnInit {
 
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
+  @ViewChild('historyTable') private myScrollContainer: ElementRef | undefined;
 
   get $swarm(): Observable<Swarm | undefined> {
     return this.gameService.$swarm;
@@ -45,7 +45,6 @@ export class GameComponent implements OnInit {
   resetGame() {
     this.gameService.resetGame();
   }
-
 
   ngAfterViewChecked() {
     this.scrollToBottom();

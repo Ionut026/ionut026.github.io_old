@@ -32,30 +32,8 @@ export class ConfigService {
     this.gameConfiguration = new BehaviorSubject<GameConfiguration>(this.defaultConfiguration);
   }
 
-  resetConfiguration() {
-    this.gameConfiguration.next(this.defaultConfiguration);
-  }
-
   updateUserName(userName: string) {
     localStorage.setItem('userName', userName ?? "");
     this.gameConfiguration.next({ userName, beeTypesConfiguration: this.gameConfiguration.value.beeTypesConfiguration });
-  }
-
-  addBeeTypeConfiguration(beeType: BeeType) {
-    let list = this.gameConfiguration.value.beeTypesConfiguration;
-    if (list.length > 0 && list.some(x => x.name === beeType.name)) {
-      alert("The bee name already exist and was not added.");
-    }
-    else {
-      list.push(beeType);
-    }
-    this.gameConfiguration.next({ userName: this.gameConfiguration.value.userName, beeTypesConfiguration: list });
-  }
-
-  removeBeeTypeConfiguration(beeName: string) {
-    this.gameConfiguration.next({
-      userName: this.gameConfiguration.value.userName, beeTypesConfiguration:
-        this.gameConfiguration.value.beeTypesConfiguration.filter(x => x.name != beeName)
-    });
-  }
+  }  
 }
